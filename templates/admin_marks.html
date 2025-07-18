@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - All Student Marks</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #eef3f7;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .header {
+      font-size: 28px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .table {
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    .no-data {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      color: #777;
+    }
+    .back-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">📘 All Students' Marks</div>
+
+    {% if all_marks %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>English</th>
+            <th>Hindi</th>
+            <th>Telugu</th>
+            <th>Maths</th>
+            <th>Science</th>
+            <th>Social</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mark in all_marks %}
+          <tr>
+            <td>{{ mark.student.rollno }}</td>
+            <td>{{ mark.student.name }}</td>
+            <td>{{ mark.english }}</td>
+            <td>{{ mark.hindi }}</td>
+            <td>{{ mark.telugu }}</td>
+            <td>{{ mark.maths }}</td>
+            <td>{{ mark.science }}</td>
+            <td>{{ mark.social }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="no-data">No student marks data available.</p>
+    {% endif %}
+
+    <div class="text-center back-btn">
+      <a href="{% url 'admin' %}" class="btn btn-secondary">← Back to Admin Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

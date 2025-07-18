@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: #fff !important;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: #ffc107 !important;
+    }
+
+    .dashboard-card {
+      height: 220px;
+      border: none;
+      border-radius: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .dashboard-card i {
+      font-size: 2.5rem;
+      color: #0d6efd;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .stats {
+      font-size: 2rem;
+      color: #198754;
+    }
+
+    .section-heading {
+      font-weight: bold;
+      color: #0d6efd;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-card {
+        height: auto;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🛠️ Admin Panel</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">🔓 Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="text-center section-heading">Welcome Admin 👋</h2>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Total Students -->
+      <div class="col-md-4 col-sm-6">
+        <div class="dashboard-card">
+          <i class="bi bi-people-fill"></i>
+          <div class="card-title">Total Students</div>
+          <div class="stats">{{ student_count }}</div>
+        </div>
+      </div>
+
+      <!-- Add Student -->
+      <div class="col-md-4 col-sm-6">
+        <a href="{% url 'register' %}" class="text-decoration-none text-dark">
+          <div class="dashboard-card">
+            <i class="bi bi-person-plus-fill"></i>
+            <div class="card-title">Add Student</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Search -->
+      <div class="col-md-4 col-sm-6">
+        <a href="{% url 'search' %}" class="text-decoration-none text-dark">
+          <div class="dashboard-card">
+            <i class="bi bi-search"></i>
+            <div class="card-title">Search Students</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- View Marks -->
+      <div class="col-md-4 col-sm-6">
+        <a href="{% url 'admin_marks' %}" class="text-decoration-none text-dark">
+          <div class="dashboard-card">
+            <i class="bi bi-bar-chart-line-fill"></i>
+            <div class="card-title">View Marks</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Update/Delete Students -->
+      <div class="col-md-4 col-sm-6">
+        <a href="{% url 'admin_students' %}" class="text-decoration-none text-dark">
+          <div class="dashboard-card">
+            <i class="bi bi-pencil-square"></i>
+            <div class="card-title">Update/Delete Student</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Add Marks -->
+      <div class="col-md-4 col-sm-6">
+        <a href="{% url 'amarks' %}" class="text-decoration-none text-dark">
+          <div class="dashboard-card">
+            <i class="bi bi-plus-circle-fill"></i>
+            <div class="card-title">Add Marks</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

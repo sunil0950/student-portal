@@ -1,0 +1,206 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --background-gradient: linear-gradient(to right, #f0f4ff, #dbeafe);
+      --card-bg: #ffffff;
+      --text-color: #111827;
+      --input-bg: transparent;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--background-gradient);
+      color: var(--text-color);
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .form-box {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 35px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      animation: slideIn 0.6s ease;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+    }
+
+    .form-box table {
+      width: 100%;
+    }
+
+    .form-box th {
+      text-align: left;
+      padding: 10px 10px 10px 0;
+      vertical-align: top;
+      width: 35%;
+    }
+
+    .form-box td {
+      padding: 10px 0;
+      position: relative;
+    }
+
+    .form-box input[type="text"],
+    .form-box input[type="password"] {
+      width: 100%;
+      padding: 10px 40px 10px 10px;
+      border: 1.8px solid #cbd5e1;
+      border-radius: 8px;
+      background: var(--input-bg);
+      color: var(--text-color);
+      font-size: 15px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-box input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+
+    .form-box input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      outline: none;
+    }
+
+    .form-box input[type="submit"] {
+      background: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+
+    .form-box input[type="submit"]:hover {
+      background: #4338ca;
+    }
+
+    .form-box p {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .form-box p a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-box p a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      padding-bottom: 10px;
+    }
+
+    .toggle-eye {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+      color: #6b7280;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-height: 700px), (max-width: 500px) {
+      .container {
+        align-items: flex-start;
+        padding-top: 30px;
+      }
+      .form-box {
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form class="form-box" action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <h2>Student Login</h2>
+
+      {% if r %}
+        <div class="error-message">{{ r }}</div>
+      {% endif %}
+
+      <table>
+        <tr>
+          <th>Roll No:</th>
+          <td><input type="text" name="roll no" placeholder="Enter Roll No" required></td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td>
+            <input type="password" name="password" id="loginpass" placeholder="Enter Password" required>
+            <span class="toggle-eye" onclick="togglePassword('loginpass', this)">👁</span>
+          </td>
+        </tr>
+      </table>
+
+      <input type="submit" value="Login">
+
+      <p>Not registered yet? <a href="{% url 'register' %}">Create an account</a></p>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, eyeIcon) {
+      const input = document.getElementById(fieldId);
+      const type = input.getAttribute("type") === "password" ? "text" : "password";
+      input.setAttribute("type", type);
+      eyeIcon.textContent = type === "password" ? "👁" : "🙈";
+    }
+  </script>
+</body>
+</html>

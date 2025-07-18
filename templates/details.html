@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        .form-control:focus {
+            border-color: #6a1b9a;
+            box-shadow: 0 0 0 0.2rem rgba(106, 27, 154, 0.25);
+        }
+        .btn-primary {
+            background-color: #6a1b9a;
+            border-color: #6a1b9a;
+        }
+        .btn-primary:hover {
+            background-color: #4a0072;
+        }
+        img.rounded-circle {
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header1.html' %}
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card p-4">
+                    <h3 class="text-center mb-4">Update Student Details</h3>
+
+                    {% if msg %}
+                        <div class="alert alert-success text-center">{{ msg }}</div>
+                    {% endif %}
+
+                    {% if student.image %}
+                        <div class="text-center mb-3">
+                            <img src="{{ student.image.url }}" width="120" height="120" class="rounded-circle border" alt="Current Photo">
+                            <p class="text-muted small">Current Photo</p>
+                        </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="roll" class="form-label">Roll No (readonly)</label>
+                            <input type="text" class="form-control" id="roll" value="{{ student.rollno }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stname" class="form-label">Student Name</label>
+                            <input type="text" class="form-control" id="stname" name="stname" value="{{ student.name }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email ID</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ student.email }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" id="phone" name="phone" value="{{ student.phoneno }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Update Photo</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                        </div>
+                        <div class="d-grid">
+                           <center> <button style="width:fit-content;"  type="submit" class="btn btn-primary">Update Details</button></center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

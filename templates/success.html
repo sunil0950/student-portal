@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Success page</title>
+</head>
+<body>
+<center> <h2 style="color: green;">Registration Successful!</h2>
+
+    <h3>Student Details</h3>
+    <p><strong>Roll No:</strong> {{ student.rollno }}</p>
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Phone:</strong> {{ student.phoneno }}</p>
+
+    <h3>Uploaded Photo:</h3>
+    <img src="{{ student.image.url }}" alt="Student Photo" width="200" height="200">
+
+    <br><br>
+  <h2><font color="red">Thank You!<br>Registration Done</font></h2>
+    <a href="{% url 'login' %}">Go to Login</a>
+</center>
+</body>
+</html>
